@@ -1,13 +1,16 @@
-import "./App.css";
-import ExpenseTracker from "./components/ExpenseTracker";
+import React from 'react';
+import Navbar from './components/Navbar';
+import './App.css';
 
+import ExpenseTracker from './components/ExpenseTracker';
 
 function App() {
-  return (
-    <div className="App">
-      <ExpenseTracker />
-    </div>
-  );
+    return (
+        <>
+            <Navbar/>
+        <ExpenseTracker />
+        </>
+    )
 }
 
 export default App;

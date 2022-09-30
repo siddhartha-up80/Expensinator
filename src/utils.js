@@ -1,5 +1,7 @@
 const uniqueId = () => {
-  return Math.round(Math.random() * 1000000);
-};
+    return Math.round(Math.random() * 1000000);
+}
 
-export { uniqueId };
+export {
+    uniqueId
+}

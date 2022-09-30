@@ -1,57 +1,47 @@
-import React, { useState } from "react";
-import { uniqueId } from "../utils";
-const TransactionForm = ({ onNewTransaction }) => {
-  const [nameValue, setNameValue] = useState("");
-  const [amountValue, setAmountValue] = useState("");
+import React, { useState } from 'react';
+import { uniqueId } from '../utils';
 
-  const addTransaction = (type, event) => {
-    event.preventDefault();
-    const data = {
-      id: uniqueId(),
-      name: nameValue,
-      amount: parseInt(amountValue),
-      type: type,
-    };
-    onNewTransaction(data);
-  };
+function TransactionForm({ onNewTransaction }) {
+    const [nameValue, setNameValue] = useState('');
+    const [amountValue, setAmountValue] = useState('');
 
-  return (
-    <>
-      <div>Add New Transaction</div>
-      <form>
-        <label>
-          Name
-          <div>
-            <input
-              type="text"
-              name=""
-              value={nameValue}
-              onChange={(e) => setNameValue(e.target.value)}
-            />
-          </div>
-        </label>
-        <label>
-          Amount
-          <div>
-            <input
-              type="number"
-              name=""
-              value={amountValue}
-              onChange={(e) => setAmountValue(e.target.value)}
-            />
-          </div>
-        </label>
+    const addTransaction = (type, evt) => {
+        evt.preventDefault();
+
+        const data = { id: uniqueId(), name: nameValue, 
+                amount: parseInt(amountValue), type: type };
+
+        onNewTransaction(data);
+
+        setNameValue('');
+        setAmountValue('');
+    }
+
+    return (
         <div>
-          <button onClick={(e) => addTransaction("income", e)}>
-            Add Income
-          </button>
-          <button onClick={(e) => addTransaction("expense", e)}>
-            Add Expense
-          </button>
+            <h2>Add New Transactions</h2>
+            <form className='transaction-form'>
+                <label>
+                    Name
+                    <div>
+                        <input type="text" value={nameValue}
+                            onChange={(e) => setNameValue(e.target.value)} />
+                    </div>
+                </label>
+                <label>
+                    Amount
+                    <div>
+                        <input type="number" value={amountValue}
+                            onChange={(e) => setAmountValue(e.target.value)} />
+                    </div>
+                </label>
+                <div>
+                    <button className='income-btn' onClick={(e) => addTransaction('income', e)}>Add Income</button>
+                    <button className='expense-btn' onClick={(e) => addTransaction('expense', e)}>Add Expense</button>
+                </div>
+            </form>
         </div>
-      </form>
-    </>
-  );
-};
+    )
+}
 
 export default TransactionForm;
